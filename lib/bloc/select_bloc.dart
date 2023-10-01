@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-
 part 'select_event.dart';
 part 'select_state.dart';
 
@@ -18,7 +17,7 @@ class SelectBloc extends Bloc<SelectEvent, SelectState> {
       }
       if (event is RemoveSelectEvent) {
         emit(SelectLoadingState());
-        if (selected != null) selected.remove(event.opent);
+        selected.remove(event.opent);
         emit(LoadedDataState(options, options: selected));
       }
     });
