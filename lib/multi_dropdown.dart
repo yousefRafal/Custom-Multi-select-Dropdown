@@ -3,22 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:test_gradle/bloc/select_bloc.dart';
 
-class MultiSelectSearch extends StatefulWidget {
-  @override
-  _MultiSelectSearchState createState() => _MultiSelectSearchState();
-}
-
-class _MultiSelectSearchState extends State<MultiSelectSearch> {
+class MultiSelectSearch extends StatelessWidget {
   List<String> selectedOptions = [];
-
-  // List<String> options = [
-  //   'Yemen',
-  //   'Yousef',
-  //   'KSA',
-  //   'Oman',
-  //   'YAH',
-  //   'Option 6',
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +13,19 @@ class _MultiSelectSearchState extends State<MultiSelectSearch> {
         title: const Text('Multi-Select Search'),
       ),
       body: BlocBuilder<SelectBloc, SelectState>(builder: (context, state) {
-        // TODO: implement listener
         if (state is SelectLoadingState) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (state is LoadedDataState)
+          // ignore: curly_braces_in_flow_control_structures
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
                 TypeAheadField(
-                  textFieldConfiguration: TextFieldConfiguration(
+                  textFieldConfiguration: const TextFieldConfiguration(
                     decoration: InputDecoration(
                       labelText: 'Search',
-                      border: const OutlineInputBorder(),
+                      border: OutlineInputBorder(),
                     ),
                   ),
                   suggestionsCallback: (pattern) async {
@@ -56,9 +42,6 @@ class _MultiSelectSearchState extends State<MultiSelectSearch> {
                   onSuggestionSelected: (suggestion) {
                     BlocProvider.of<SelectBloc>(context)
                         .add(AddSelectEvent(suggestion));
-                    // setState(() {
-                    //   selectedOptions.add(suggestion);
-                    // });
                   },
                 ),
                 const SizedBox(height: 16.0),
@@ -82,7 +65,7 @@ class _MultiSelectSearchState extends State<MultiSelectSearch> {
               ],
             ),
           );
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       }),
